@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login con Supabase</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(to bottom, #00c6ff, #0072ff);
+    }
+
+    .container {
+      background: white;
+      padding: 2.5rem 3rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: #333;
+      margin-bottom: 1.5rem;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1.2rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      background-color: #f9f9f9;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #0072ff;
+      background-color: #e6f3ff;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.9rem;
+      background-color: #0072ff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #005bb5;
+    }
+
+    .error {
+      margin-top: 1rem;
+      color: red;
+      font-weight: bold;
+    }
+
+    .success {
+      margin-top: 1rem;
+      color: green;
+      font-weight: bold;
+    }
+
+    .footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    .footer a {
+      color: #0072ff;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Iniciar Sesión</h2>
+
+    <form id="login-form">
+      <input type="email" id="correo" placeholder="Correo Electrónico" required />
+      <input type="password" id="control" placeholder="Contraseña" required />
+      <button type="submit">Entrar</button>
+    </form>
+
+    <div id="mensaje"></div>
+
+    <div class="footer">
+      <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
+    </div>
+  </div>
+
+  <script type="module">
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+    const SUPABASE_URL = "https://vsxepokxihwlpojlpmjf.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZzeGVwb2t4aWh3bHBvamxwbWpmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ3MjQyMTQsImV4cCI6MjA2MDMwMDIxNH0.ycfke4A6dRp66Qz6sIzO83BtXZJ61BrSpBXaScJrMpo";
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    document.getElementById("login-form").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const correo = document.getElementById("correo").value;
+      const control = document.getElementById("control").value;
+      const mensajeDiv = document.getElementById("mensaje");
+
+      mensajeDiv.textContent = "";
+      mensajeDiv.className = "";
+
+      const { data, error } = await supabase
+        .from("usuarios")
+        .select("*")
+        .eq("correo", correo)
+        .eq("control", control)
+        .single();
+
+      if (error || !data) {
+        mensajeDiv.textContent = "Correo o contraseña incorrectos.";
+        mensajeDiv.classList.add("error");
+      } else {
+        // Redirigir a nueva ventana con correo y deuda en la misma ventana
+        const url = `bienvenida.html?correo=${encodeURIComponent(data.correo)}&deuda=${encodeURIComponent(data.deuda)}`;
+        window.location.href = url;
+      }
+    });
+  </script>
+
+</body>
+</html>
