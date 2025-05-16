@@ -90,7 +90,7 @@ const SUPABASE_URL = "https://vsxepokxihwlpojlpmjf.supabase.co";
     }
 
     function cerrarSesion() {
-      window.location.href = "form.html"; // Redirige a form.html
+      window.location.href = "index.html"; // Redirige a form.html
     }
 
     async function descargarPDF() {
