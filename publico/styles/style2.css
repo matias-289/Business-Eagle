@@ -1,0 +1,106 @@
+   * { box-sizing: border-box; }
+   body {
+    height: 100vh;
+    background: linear-gradient(-45deg, #18cc0f, #1113999b, #247518, #173b00);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Animación del fondo */
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+    .card {
+      background: rgb(179, 175, 157);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 750px;
+    }
+    h1 {
+      color: #0f0f0f;
+    }
+    #correo {
+      color: #000000;
+      font-weight: 500;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+    }
+    th, td {
+      padding: 0.7rem;
+      text-align: left;
+    }
+    th {
+      background-color: #03693b;
+      color: #000000;
+      border-bottom: 2px solid #a1d807;
+    }
+    tr:nth-child(even) {
+      background-color: #f5faff;
+    }
+    tr.vencida {
+      background-color: #ffebee !important;
+      color: #b71c1c;
+      font-weight: bold;
+    }
+    tr.hoy {
+      background-color: #fff3e0 !important;
+      color: #e65100;
+      font-weight: bold;
+    }
+    tr:hover {
+      background-color: #e1f5fe;
+    }
+    #error {
+      margin-top: 1rem;
+      color: red;
+      font-weight: bold;
+    }
+    .btn-group {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    button {
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #084d26;
+      color: white;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+    button:hover {
+      background-color: #0da177;
+    }
+    .total-vencidas {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #d32f2f;
+    }
+ a {
+  color: #063f21;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+  border-bottom: 2px solid transparent;
+  font-size: 20px;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+a:hover {
+  color: #0e8cd1;
+  border-bottom: 2px solid #0e8cd1;
+}
